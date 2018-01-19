@@ -24,7 +24,7 @@ $(function () {
         });
 
             function showCountriesList(resp) {
-                var ID = $('#error');
+                var ID = $('#changeMe');
 
                 countriesList.empty();
                 resp.forEach(function(item) {
@@ -57,12 +57,12 @@ $(function () {
                             $('<div>').addClass('country-span').appendTo(divCountryCont);
                 });
                 
-                ID.text('List of countries: found ' + $('ul#countries li').length);
+                ID.removeClass('error').text('List of countries: found ' + $('ul#countries li').length);
             }
 
         function notFound() {
             countriesList.empty();
-            $('#error').addClass('error').text('Not found, try again');
+            $('#changeMe').addClass('error').text('Not found, try again');
             
         }
 }
