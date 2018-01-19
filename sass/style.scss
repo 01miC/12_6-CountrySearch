@@ -1,0 +1,132 @@
+$bgcolor:rgb(35, 34, 53);
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:200,400');
+* {
+    margin:0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+    color:#fff;
+}
+
+body {
+    background-color:$bgcolor;
+}
+.search {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    
+    >h1{ 
+        padding:0 30px;
+        flex:3;
+    }
+    >button {
+        order:1;
+        margin:0 30px;
+        background-color:lighten($bgcolor,40%);
+        border-width:3px;
+        border-color:lighten($bgcolor,20%);
+        border-style:none solid solid none;
+        box-sizing: content-box;
+        padding:5px 10px;
+        &:hover {
+            border-width:1px;
+            margin:0 2px 2px 0;
+            padding:10px 30px;
+            transition: all 0.2s ease-out;
+        }
+    }
+    >input {
+        background-color:lighten($bgcolor,10%);
+        border-width:3px;
+        border-color:lighten($bgcolor,20%);
+        border-style:none solid solid none;
+        box-sizing: content-box;
+        padding:5px 10px;
+        flex:3;
+    }
+}
+
+#countries {
+    list-style-type : none;
+    -webkit-margin-before: 0em;
+    -webkit-margin-after: 0em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 0px;
+    >li {
+        margin-bottom:2px;
+    }
+    .country-cont {
+        width:70vw;
+        margin:0 auto;
+        background-color:lighten($bgcolor,20%);
+        border:2px lighten($bgcolor,20%) solid;
+        text-align: left;
+            display:grid;
+            grid-template-columns: 250px  auto ;
+            grid-template-rows: 150px 30px auto 30px;
+        >img {
+            grid-row-start: 1;
+            grid-row-end: 1;
+            grid-column-start: 1;
+            grid-column-end: 1;
+            align-self: center;
+            justify-self: center;
+            width:220px;
+            object-fit:scale-down;  
+            border:none;
+        }
+        >h1 {
+            grid-row-start: 1;
+            grid-row-end: 1;
+            grid-column-start: 2;
+            grid-column-end: 2;
+            line-height: 150px;
+            font-size:2em;
+            padding-left:30px;
+        }
+        .country-span {
+            grid-column:1 / span 2;
+            line-height: 30px;
+            background-color:lighten($bgcolor,25%);
+            color:#fff;
+        }
+        .country-left {
+            background-color:lighten($bgcolor,30%);
+            grid-column:1;
+            grid-row-start:3;
+            grid-row-end:3;
+            padding:10px;
+        }
+        .country-right {
+            background-color:lighten($bgcolor,35%);
+            padding:10px 10px 10px 30px;
+        }
+    }
+}
+
+.error {
+    /*height:100vh;
+    display:flex;
+    justify-content: center;
+    align-items: center;*/
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    animation: error 1s infinite;
+}
+
+@keyframes error {
+    0% {
+        margin-left:-10px;
+    }
+    50% {
+        margin-left:10px;
+    }
+    100% {
+        margin-left:-10px;
+    }
+    
+}

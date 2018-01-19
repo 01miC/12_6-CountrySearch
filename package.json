@@ -1,0 +1,46 @@
+{
+  "name": "npm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "parallelshell \"npm run test:html\" \"npm run test:js\"",
+    "test:html": "glob-run nu-html-checker *.html",
+    "test:js": "glob-run jshint js/*.js",
+    "init-project": "npm config set loglevel warn && npm run init:dirs && npm run init:files && npm run init:gitignore && npm run init:git && npm run init:npm-install",
+    "init:dirs": "mkdir -p sass css vendor images js",
+    "init:files": "touch README.md index.html sass/style.scss js/script.js",
+    "init:gitignore": "curl https://raw.githubusercontent.com/github/gitignore/master/Node.gitignore -o .gitignore",
+    "init:git": "git init",
+    "init:npm-install": "npm install",
+    "git-clean": "git add . && git commit -m Clean && git remote add origin git@github.com:01miC/10_3-KaruzelaJQuery.git && git push -u origin master",
+    "build": "npm run build:clean && npm run build:sass && npm run build:autoprefixer && npm run test",
+    "build:clean": "node_modules/.bin/rimraf.cmd css/*.css",
+    "build:sass": "node_modules/.bin/node-sass.cmd --output-style compact -o css scss",
+    "build:sass:dev": "node_modules/.bin/node-sass.cmd --output-style expanded --source-map true -o css scss",
+    "build:autoprefixer": "node_modules/.bin/autoprefixer-cli.cmd css/style.css",
+    "watch": "parallelshell \"npm run watch:sassprefixer\" \"npm run browser:sync\"",
+    "browser:sync": "node_modules/.bin/browser-sync.cmd start --server --files css/*.css *.html",
+    "watch:sass": "node_modules/.bin/node-sass.cmd -d 100 --output-style expanded --source-map true -o css scss",
+    "watch:autoprefixer": "node_modules/.bin/onchange.cmd css/style.scss -- autoprefixer-cli -o css/style.prefixed.css css/style.css",
+    "watch:sassprefixer": "parallelshell \"npm run watch:autoprefixer\" \"npm run watch:sass\" ",
+    "install": "npm install --save parallelshell && npm run install:all",
+    "install:all": "npm install --save autoprefixer-cli && npm install --save glob-run && npm install --save node-sass && npm install --save nu-html-checker && npm install --save onchange && npm run install --save rimraf && npm install --save jshint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.18.13"
+  },
+  "dependencies": {
+    "autoprefixer-cli": "^1.0.0",
+    "glob-run": "^0.1.6",
+    "jshint": "^2.9.5",
+    "node-sass": "^4.7.2",
+    "nu-html-checker": "^0.1.0",
+    "onchange": "^3.3.0",
+    "parallelshell": "^3.0.2",
+    "rimraf": "^2.6.2"
+  }
+}
