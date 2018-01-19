@@ -9,37 +9,35 @@ $(function () {
         }
     });
     
-function searchCountries() {
-    var countryName = $('#country-name').val();
-if(!countryName.length) 
-        countryName = 'Poland';
+        function searchCountries() {
+            var countryName = $('#country-name').val();
+        if(!countryName.length) 
+            countryName = 'Poland';
 
-    $.ajax({
-        url: url + countryName,
-        method: 'GET',
-        success: showCountriesList,
-        error: function(XMLHttpRequest, textStatus, errorThrown) { 
-            notFound();
-        }       
-    });
+        $.ajax({
+            url: url + countryName,
+            method: 'GET',
+            success: showCountriesList,
+            error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                notFound();
+            }       
+        });
 
-        function showCountriesList(resp) {
-            var error = $('#error');
-                error.removeClass('error').text('List of countries: ');
+            function showCountriesList(resp) {
+                var ID = $('#error');
 
-            countriesList.empty();
-            resp.forEach(function(item) {
-                var divCountryCont = $('<div>').addClass('country-cont');
-                var newLine = $('<li>').appendTo(countriesList);
-                var countryLeft = $('<div>').addClass('country-left');
-                var countryRight = $('<div>').addClass('country-right');
-                var flag = item.alpha2Code;
-                var sq = '\xB2';
-            
-                    divCountryCont.appendTo(newLine);   
-                    $('<img>').attr('src', "http://www.geonames.org/flags/x/" + flag.toLowerCase() + ".gif").appendTo(divCountryCont);
-                    $('<h1>').text(item.name + ", " + item.alpha3Code).appendTo(divCountryCont);
-                        $('<div>').addClass('country-span').text('More information:').appendTo(divCountryCont);
+                countriesList.empty();
+                resp.forEach(function(item) {
+                    var divCountryCont = $('<div>').addClass('country-cont');
+                    var newLine = $('<li>').appendTo(countriesList);
+                    var countryLeft = $('<div>').addClass('country-left');
+                    var countryRight = $('<div>').addClass('country-right');
+                    var flag = item.alpha2Code;
+                    var sq = '\xB2';
+                        divCountryCont.appendTo(newLine);   
+                        $('<img>').attr('src', "http://www.geonames.org/flags/x/" + flag.toLowerCase() + ".gif").appendTo(divCountryCont);
+                        $('<h1>').text(item.name + ", " + item.alpha3Code).appendTo(divCountryCont);
+                            $('<div>').addClass('country-span').text('More information:').appendTo(divCountryCont);
                             countryLeft.appendTo(divCountryCont);  
                                     $('<div>').text('Population').appendTo(countryLeft);
                                     $('<div>').text('Capital').appendTo(countryLeft);
@@ -56,11 +54,11 @@ if(!countryName.length)
                                     $('<div>').text(" : " + item.region + " ," + item.subregion).appendTo(countryRight);
                                     $('<div>').text(" : " + item.timezones[0]).appendTo(countryRight);
                                     $('<div>').text(" : " + item.topLevelDomain[0]).appendTo(countryRight);
-                        $('<div>').addClass('country-span').appendTo(divCountryCont);
-            });
-            
-            error.text('List of countries: found ' + $('ul#countries li').length);
-        }
+                            $('<div>').addClass('country-span').appendTo(divCountryCont);
+                });
+                
+                ID.text('List of countries: found ' + $('ul#countries li').length);
+            }
 
         function notFound() {
             countriesList.empty();
